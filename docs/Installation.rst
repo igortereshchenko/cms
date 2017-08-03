@@ -26,9 +26,9 @@ These are our requirements (in particular we highlight those that are not usuall
 
 * `shared-mime-info <http://freedesktop.org/wiki/Software/shared-mime-info>`_;
 
-* `TeX Live <https://www.tug.org/texlive/>`_ (only for printing)
+* `TeX Live <https://www.tug.org/texlive/>`_ (only for printing);
 
-* `a2ps <https://www.gnu.org/software/a2ps/>`_ (only for printing)
+* `a2ps <https://www.gnu.org/software/a2ps/>`_ (only for printing).
 
 You will also require a Linux kernel with support for control groups and namespaces. Support has been in the Linux kernel since 2.6.32. Other distributions, or systems with custom kernels, may not have support enabled. At a minimum, you will need to enable the following Linux kernel options: ``CONFIG_CGROUPS``, ``CONFIG_CGROUP_CPUACCT``, ``CONFIG_MEMCG`` (previously called as ``CONFIG_CGROUP_MEM_RES_CTLR``), ``CONFIG_CPUSETS``, ``CONFIG_PID_NS``, ``CONFIG_IPC_NS``, ``CONFIG_NET_NS``. It is anyway suggested to use Linux kernel version at least 3.8.
 
@@ -51,12 +51,13 @@ All dependencies can be installed automatically on most Linux distributions.
 Ubuntu
 ------
 
-On Ubuntu 14.10, one will need to run the following script to satisfy all dependencies:
+On Ubuntu 16.04, one will need to run the following script to satisfy all dependencies:
 
 .. sourcecode:: bash
 
     # Feel free to change OpenJDK packages with your preferred JDK.
-    sudo apt-get install build-essential openjdk-8-jre openjdk-8-jdk fpc \
+    sudo apt-get install build-essential openjdk-8-jre openjdk-8-jdk \
+        fp-compiler fp-units-base fp-units-fcl fp-units-misc fp-units-math fp-units-rtl \
         postgresql postgresql-client gettext python2.7 \
         iso-codes shared-mime-info stl-manual cgroup-lite
 
@@ -65,7 +66,7 @@ On Ubuntu 14.10, one will need to run the following script to satisfy all depend
          libffi-dev python-pip
 
     # Optional
-    sudo apt-get install nginx-full php5-cli php5-fpm phppgadmin \
+    sudo apt-get install nginx-full php7.0-cli php7.0-fpm phppgadmin \
          texlive-latex-base a2ps gcj-jdk haskell-platform
 
 Arch Linux
@@ -147,21 +148,19 @@ Assuming you have ``pip`` installed, you can do this:
 .. sourcecode:: bash
 
     sudo pip2 install -r requirements.txt
-    sudo pip2 setup.py install
+    sudo python2 setup.py install
 
 This command installs python dependencies globally. Note that on some distros, like Arch Linux, this might interfere with the system package manager. If you want to perform the installation in your home folder instead, then you can do this instead:
 
 .. sourcecode:: bash
 
     pip2 install --user -r requirements.txt
-    pip2 setup.py install --user
+    python2 setup.py install --user
 
 Method 2: Virtual environment
 -----------------------------
 
 .. warning::
-
-   At the moment, CMS does not work correctly when installed in a virtual environment. You can use virtual enviroment to run CMS non-installed. See :ref:`the instructions <installation_running-cms-non-installed>` on how to run CMS without installing it.
 
 An alternative method to perform the installation is with a `virtual environment <https://virtualenv.pypa.io/en/latest/>`_, which is an isolated Python environment that you can put wherever you like and that can be activated/deactivated at will. The tool you need in order to create a virtual environment is called ``virtualenv``, and can be installed by looking for ``virtualenv`` using your Linux distribution's package manager. For example:
 
@@ -217,9 +216,9 @@ To install CMS and its Python dependencies on Ubuntu, you can issue:
 
     sudo apt-get install python-setuptools python-tornado python-psycopg2 \
          python-sqlalchemy python-psutil python-netifaces python-crypto \
-         python-tz python-six python-beautifulsoup python-mechanize \
-         python-coverage python-mock python-requests python-werkzeug \
-         python-gevent python-bcrypt python-chardet patool
+         python-tz python-six python-bs4 python-coverage python-mock \
+         python-requests python-werkzeug python-gevent python-bcrypt \
+         python-chardet patool python-ipaddress
 
     # Optional.
     # sudo apt-get install python-yaml python-sphinx python-cups python-pypdf2
@@ -239,9 +238,9 @@ To install CMS python dependencies on Arch Linux (again: assuming you did not us
 
     sudo pacman -S --needed python2-setuptools python2-tornado python2-psycopg2 \
          python2-sqlalchemy python2-psutil python2-netifaces python2-crypto \
-         python2-pytz python2-six python2-beautifulsoup3 python2-mechanize \
-         python2-coverage python2-mock python2-requests python2-werkzeug \
-         python2-gevent python2-bcrypt python2-chardet
+         python2-pytz python2-six python2-beautifulsoup4 python2-coverage \
+         python2-mock python2-requests python2-werkzeug python2-gevent \
+         python2-bcrypt python2-chardet python2-ipaddress
 
     # Install the following from AUR.
     # https://aur.archlinux.org/packages/patool/
